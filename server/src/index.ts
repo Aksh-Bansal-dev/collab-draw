@@ -28,6 +28,10 @@ io.on("connection", (socket: Socket) => {
     console.log(data);
     socket.broadcast.emit("newDraw", data);
   });
+  socket.on("clear", (data) => {
+    console.log(data);
+    socket.broadcast.emit("clear", data);
+  });
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");

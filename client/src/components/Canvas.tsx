@@ -13,6 +13,7 @@ const Canvas: React.FC = () => {
   const setReff = useCanvasStore((state) => state.setReff);
   const globalColor = useCanvasStore((state) => state.color);
   const globalWidth = useCanvasStore((state) => state.width);
+  const setGlobalSocket = useCanvasStore((state) => state.setSocket);
 
   const [isDrawing, setDrawing] = useState(false);
 
@@ -83,6 +84,11 @@ const Canvas: React.FC = () => {
     setReff(contextRef);
     const socket = socketIOClient(SERVER);
     setFakeSocket(socket);
+    setGlobalSocket(socket);
+
+    socket.on("clear", () => {
+      contextRef.current.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    });
 
     socket.on("newDraw", (data) => {
       const { begin, end, point, color, thickness } = data;

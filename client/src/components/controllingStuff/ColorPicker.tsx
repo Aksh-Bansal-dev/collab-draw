@@ -13,6 +13,7 @@ const ColorPicker: React.FC = () => {
   };
 
   const handlePencil = () => {
+    setGlobalColor(color);
     ctx.current.strokeStyle = color;
   };
   return (
