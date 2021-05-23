@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { useCanvasStore } from "../../store/canvasStore";
 
 const ColorPicker: React.FC = () => {
-  const [color, setColor] = useState("black");
+  const [color, setColor] = useState("#000000");
   const ctx = useCanvasStore((state) => state.reff);
+  const setGlobalColor = useCanvasStore((state) => state.setColor);
 
   const handleColor = (newColor: string) => {
     setColor(newColor);
+    setGlobalColor(newColor);
     ctx.current.strokeStyle = color;
   };
 
